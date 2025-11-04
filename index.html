@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Virtual - Productos Tecnológicos</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/normalize.css">
+</head>
+<body>
+
+    <header>
+        <h1>🛒 Tienda Tech</h1>
+        <p>Tu destino para la última tecnología</p>
+    </header>
+
+    <main class="contenedor">
+        <section class="productos">
+            <h2>Nuestros Productos</h2>
+
+            <div class="tarjeta-producto" data-nombre="Laptop G4000" data-precio="1200">
+                <img src="/Users/Skipy/Desktop/Fullstack/Gemini/image/laptop.jpg" alt="Laptop G4000">
+                <h3>Laptop G4000</h3>
+                <p class="precio">$1200 USD</p>
+                <button onclick="agregarAlCarrito(this)">Añadir al Carrito</button>
+            </div>
+
+            <div class="tarjeta-producto" data-nombre="Smartphone X12" data-precio="800">
+                <img src="/Users/Skipy/Desktop/Fullstack/Gemini/image/smartphone.jpg" alt="Smartphone X12">
+                <h3>Smartphone X12</h3>
+                <p class="precio">$800 USD</p>
+                <button onclick="agregarAlCarrito(this)">Añadir al Carrito</button>
+            </div>
+
+            <div class="tarjeta-producto" data-nombre="Audífonos Pro" data-precio="150">
+                <img src="/Users/Skipy/Desktop/Fullstack/Gemini/image/Audifonos.jpg" alt="Audífonos Pro">
+                <h3>Audífonos Pro</h3>
+                <p class="precio">$150 USD</p>
+                <button onclick="agregarAlCarrito(this)">Añadir al Carrito</button>
+            </div>
+            
+            </section>
+
+        <aside class="carrito-contenedor">
+            <h2>🛍️ Carrito de Compras</h2>
+            <ul id="lista-carrito">
+                <li id="carrito-vacio-msg">El carrito está vacío.</li>
+            </ul>
+            <div class="total">
+                <p>Total: <span id="total-precio">$0 USD</span></p>
+            </div>
+            <button class="boton-comprar">Finalizar Compra</button>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Tienda Tech. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        let total = 0;
+        const listaCarrito = document.getElementById('lista-carrito');
+        const totalPrecio = document.getElementById('total-precio');
+        const carritoVacioMsg = document.getElementById('carrito-vacio-msg');
+
+        // Función para agregar productos al carrito
+        function agregarAlCarrito(boton) {
+            const tarjeta = boton.closest('.tarjeta-producto');
+            const nombre = tarjeta.getAttribute('data-nombre');
+            const precio = parseFloat(tarjeta.getAttribute('data-precio'));
+
+            // Ocultar mensaje de carrito vacío si está visible
+            if (carritoVacioMsg) {
+                carritoVacioMsg.style.display = 'none';
+            }
+
+            // Crear el elemento de lista para el producto
+            const nuevoItem = document.createElement('li');
+            nuevoItem.textContent = `${nombre} - $${precio} USD`;
+            listaCarrito.appendChild(nuevoItem);
+
+            // Actualizar el total
+            total += precio;
+            totalPrecio.textContent = `$${total.toFixed(2)} USD`;
+            
+            alert(`"${nombre}" añadido al carrito!`);
+        }
+    </script>
+</body>
+</html>
